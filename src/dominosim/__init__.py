@@ -25,10 +25,11 @@ class Object:
         self.rot = rot
 
 class Level:
-    def __init__(self, objects=None):
+    def __init__(self, objects=None, global_delete_existing=False):
         if objects is None:
             objects = []
         self.objects = objects
+        self.global_delete_existing = global_delete_existing
 
     def get_objects(self) -> List[Object]:
         return self.objects
@@ -39,9 +40,15 @@ class Level:
                 return existing_obj
         return None
 
+    def get_object_xy(self, x: int, y: int) -> Object | None:
+        for [i, existing_obj] in enumerate(self.objects):
+            if existing_obj.x == x and existing_obj.y == y:
+                return existing_obj
+        return None
+
     def delete_object(self, obj: Object) -> None:
         for [i, existing_obj] in enumerate(self.objects):
-            if existing_obj.x == obj.x and existing_obj.y == obj.y:
+            if existing_obj.x == obj.x and existing_obj.y == obj.y and existing_obj.type == obj.type:
                 self.objects.pop(i)
                 break
 
@@ -52,7 +59,7 @@ class Level:
                 break
 
     def add_object(self, obj: Object, delete_existing=False) -> None:
-        if delete_existing:
+        if delete_existing or self.global_delete_existing:
             self.delete_object(obj)
         self.objects.append(obj)
 
@@ -81,5 +88,5 @@ class Level:
 
         return Level(objects)
 
-    def stringify(self):
+    def stringify(self) -> str:
         return ' '.join([f'{obj.name.value} {obj.x} {obj.y} {obj.rot.value}' for obj in self.objects])
