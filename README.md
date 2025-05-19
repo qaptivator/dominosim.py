@@ -10,11 +10,16 @@ it will act as a regular PyPi package, but wont be actually hosted there (there 
 
 # usage
 ```py
-from dominosim import Level
+from src.dominosim import Level, Object, OBJ_TYPE, OBJ_ROT
 level = Level()
 # or level = Level.parse('...')
-level.add_object()
+level.add_object(Object(
+    OBJ_TYPE.ORTHOGONAL_DOMINO,
+    -2, 5,
+    OBJ_ROT.RIGHT
+))
 print(level.stringify())
+# or open('result.txt', 'w').write(level.stringify())
 ```
 
 # license
