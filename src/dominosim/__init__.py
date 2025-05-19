@@ -25,7 +25,7 @@ class Object:
         self.rot = rot
 
 class Level:
-    def __init__(self, objects=None, global_delete_existing=False):
+    def __init__(self, objects:List[Object]=None, global_delete_existing=False):
         if objects is None:
             objects = []
         self.objects = objects
