@@ -68,7 +68,7 @@ class Level:
         parts = level_str.strip().split(' ')
 
         objects = []
-        obj_name = ''
+        obj_type = ''
         obj_x = 0
         obj_y = 0
         obj_rot = 0
@@ -76,17 +76,17 @@ class Level:
         for [index, part] in enumerate(parts):
             var_index = index % 4
             if var_index == 0:
-                obj_name = part
+                obj_type = part
             elif var_index == 1:
                 obj_x = int(part)
             elif var_index == 2:
                 obj_y = int(part)
             elif var_index == 3:
                 obj_rot = int(part) or 0
-                if obj_name:
-                    objects.append(Object(OBJ_TYPE(obj_name), obj_x, obj_y, OBJ_ROT(obj_rot)))
+                if obj_type:
+                    objects.append(Object(OBJ_TYPE(obj_type), obj_x, obj_y, OBJ_ROT(obj_rot)))
 
         return Level(objects)
 
     def stringify(self) -> str:
-        return ' '.join([f'{obj.name.value} {obj.x} {obj.y} {obj.rot.value}' for obj in self.objects])
+        return ' '.join([f'{obj.type.value} {obj.x} {obj.y} {obj.rot.value}' for obj in self.objects])
