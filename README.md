@@ -44,5 +44,9 @@ _here is a list of useful code snippets when working with domino levels:_
     level = d.Level() # ...
     ```
 
+# for contributors (future me)
+
+when making a new version, dont forget to update `setup.py` and also `pyproject.toml` (updating the toml file is optional). then, make a new git tag with `git tag vX.Y.Z` and push it to main with `git push origin tag vX.Y.Z`.
+
 # license
 MIT license (`LICENSE.txt`)
